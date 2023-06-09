@@ -4,7 +4,7 @@ public class Student {
     int rollNo;
     String name,email;
 
-    public int getRollNO() {
+    public int getRollNo() {
         return rollNo;
     }
 

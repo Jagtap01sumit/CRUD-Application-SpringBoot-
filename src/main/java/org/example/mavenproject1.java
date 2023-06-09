@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class mavenproject1 {
     public static void main(String[] args) {
-        SpringApplication.run(mavenproject1.class,args);
+        SpringApplication.run(mavenproject1.class, args);
 
     }
 }
