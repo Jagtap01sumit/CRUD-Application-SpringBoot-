@@ -1,7 +1,6 @@
 package org.example.controller;
 
 import model.Student;
-import org.example.service.StudentService;
 import org.example.service.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +22,7 @@ public class StudentController {
         service.insertStudent(student);
 
     }
+
     @RequestMapping("/insertMultiple")
     @ResponseBody
     void insertMultiple(@RequestBody List<Student> studentList) {
@@ -36,10 +36,23 @@ public class StudentController {
         return service.selectStudent(rollNo);
     }
 
+    @RequestMapping("/selectMultiple")
+    @ResponseBody
+    List<Student> selectMultiple(@RequestParam List<Integer> rollNo) {
+        return service.selectMultiple(rollNo);
+    }
+
     @RequestMapping("/update")
     @ResponseBody
     Student updateStudent(@RequestBody Student student) {
         return service.updateStudent(student);
+
+    }
+
+    @RequestMapping("/updateMultiple")
+    @ResponseBody
+    List<Student> updateMultiple(@RequestBody List<Student> studentList) {
+        return service.updateMultiple(studentList);
 
     }
 
@@ -48,5 +61,10 @@ public class StudentController {
     boolean deleteStudent(@RequestParam int rollNo) {
         return service.deleteStudent(rollNo);
     }
-
+//
+//    @RequestMapping("/deleteMultiple")
+//    @ResponseBody
+//    boolean deleteMultiple(@RequestParam List<Integer> rollNo) {
+//        return service.deleteMultiple(rollNo);
+//    }
 }

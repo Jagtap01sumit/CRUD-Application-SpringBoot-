@@ -1,14 +1,16 @@
 package model;
 
+import java.util.List;
+
 public class Student {
     int rollNo;
-    String name,email;
+    String name, email;
 
     public int getRollNo() {
         return rollNo;
     }
 
-    public void setRollNO(int rollNO) {
+    public void setRollNo(int rollNo) {
         this.rollNo = rollNo;
     }
 
