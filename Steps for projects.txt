@@ -1,0 +1,136 @@
+(Lec 116.............)
+SpringBoot work on threee layers          
+
+                                              UI
+                                           
+                                          Controller
+                    
+                                           Service
+ 
+                                           Reposetory
+
+                                            Database
+
+
+UI request to Controller ,Controller request to Servie and service request to Repo
+
+
+
+
+
+* MVC(Model View Control
+Model :- Encapsulation(getter setter class)
+View :-React-frontend
+Control :- Controller
+
+
+*Annotations
+SpringBootApplication
+Override
+RequestMapping
+RequestBody
+RequestParams
+Controller 
+Service
+Repo
+
+
+
+
+--studentController.java
+@RequestMapping("/update")
+@ResponseBody
+   Student updateStudent(@RequestBody Student student){
+   return service.updateStudent(student);     //this refers after writing updateStudent() func in studentService.java
+
+}
+	
+	
+--studentServiceImpl.java
+ Student updateStudent(Student student);
+
+
+--studentRepoImpl.java
+ Student updateStudent(Student student);
+   
+--studentRopo.java
+//every jdbc connection is here
+//Student updateStudent(Student student);
+
+//final stage
+  
+@Override
+public Student updateStudent(Student student) {
+    try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/mumbai", "root", " ");
+            Statement st = con.createStatement();
+            st.executeUpdate("insert into student values('" + student.getRollNO() + "','" + student.getName() + "','" + student.getEmail() + "')");
+        } catch (Exception e) {
+            System.out.println(e);
+
+        }
+        return selectStudent(student.getRollNO());
+    }
+
+
+--studentService.java
+ @Override
+ public Student updateStudent(Student student){
+    return  repo.updateStudent(student);
+}
+
+************************************************************************
+
+How to add,delete,update Multipledata in project-------------------------
+
+StudentController.java
+
+@RequestMapping("/selectMultiple")
+    @ResponseBody
+    List<Student> selectMultiple(@RequestParam List<Integer> rollNo) {
+        return service.selectMultiple(rollNo);
+    }
+	
+StudentServiceImpl.java
+
+List<Student> selectMultiple(List<Integer> rollNo) ;
+ 
+StudentService.java
+  @Override
+    public List<Student> selectMultiple(List<Integer> rollNo) {
+
+        List<Student> studentList=new ArrayList<>();//empty list
+        for(int i=0;i<rollNo.size();i++){
+            studentList.add(repo.selectStudent(rollNo.get(i)));
+        }
+        return studentList;
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+**************************************Extend the project****************************************
+
+new project
+create four packages(Model,Controller,Service,Repo)
+In Model there are two classes(.java)  (Student , Teacher {getter and setters})
+In Controller make a class of TeacherController.java
+In service there are two classes (TeacherServie,TeacherServiceImpl)
+In Repo there are two Classes (TeacherRepo,TeacherRepoImpl)
+
+To push request from Controller to Service ..make a object of Servie (TeacherServiceImpl service)
+
+
